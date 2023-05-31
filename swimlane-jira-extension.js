@@ -9,12 +9,21 @@
 // @run-at       document-idle
 // ==/UserScript==
 
+// ==OpenUserJS==
+// @author      5he1d0r
+// ==/OpenUserJS==
+
 // TODO: propper styling of the avatars
 const avatar = (assignee) =>
 `
 <span class="aui-avatar">
   <span class="aui-avatar-inner">
-    <img src="${assignee.avatarUrls["48x48"]}" class="aui-avatar-img" title="Bearbeiter: ${assignee.displayName}" loading="lazy" alt="${assignee.name}" />
+    <img src="${assignee.avatarUrls["48x48"]}"
+         class="aui-avatar-img"
+         title="Bearbeiter: ${assignee.displayName}"
+         loading="lazy"
+         alt="${assignee.name}"
+     />
   </span>
 </span>
 `
