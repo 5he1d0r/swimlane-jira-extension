@@ -20,7 +20,6 @@ Go [here](https://openuserjs.org/scripts/5he1d0r/swimlane_jira_extension) and in
 ## Known issues
 
 - Icons disapear if jira auto refreshes the page.
-- Not working after filters are applied
 - ...
 - Every time the content changes without reloading the page
 
