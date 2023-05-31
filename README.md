@@ -15,7 +15,7 @@ Features like contiguration panel, story points, worklog, ... are planed.
 Install an user script manager, like [tampermonkey](https://www.tampermonkey.net/), in your browser.
 
 **Step 2**  
-Go [TODO](https://openuserjs.org/scripts/5he1d0r/use_click-tt) and install the user script.
+Go [here](https://openuserjs.org/scripts/5he1d0r/swimlane_jira_extension) and install the user script.
 
 ## Known issues
 
