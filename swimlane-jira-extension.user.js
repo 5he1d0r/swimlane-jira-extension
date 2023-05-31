@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Jira Assignee on 
+// @name         swimlane jira extension
 // @namespace    https://openuserjs.org/users/5he1d0r
 // @copyright    2023, 5he1d0r (https://openuserjs.org/users/5he1d0r)
 // @version      0.1
@@ -8,9 +8,9 @@
 // @match        *://*/*RapidBoard.jspa?rapidView=*
 // @grant        none
 // @run-at       document-idle
-// @updateURL    https://openuserjs.org/meta/5he1d0r/swimlane_jira_extension.meta.js
 // @description  display the assignee on closed swimlane
 // ==/UserScript==
+// @updateURL    https://openuserjs.org/meta/5he1d0r/Jira_Assignee_on.meta.js
 
 // ==OpenUserJS==
 // @author      5he1d0r
