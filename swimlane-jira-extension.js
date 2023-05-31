@@ -1,12 +1,14 @@
 // ==UserScript==
-// @name         Jira Assignee on swimlane
-// @namespace    jira
+// @name         Jira Assignee on 
+// @namespace    https://openuserjs.org/users/5he1d0r
+// @copyright    2023, 5he1d0r (https://openuserjs.org/users/5he1d0r)
 // @version      0.1
-// @description  display the assignee on closed swimlane
+// @license      MIT
 // @author       5he1d0r
 // @match        *://*/*RapidBoard.jspa?rapidView=*
 // @grant        none
 // @run-at       document-idle
+// @description  display the assignee on closed swimlane
 // ==/UserScript==
 
 // ==OpenUserJS==
