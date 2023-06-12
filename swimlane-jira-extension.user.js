@@ -77,5 +77,5 @@ const jiraExtension = async () => {
 }
 
 (function() {
-    setTimeout(() => jiraExtension(), 2000);
+    setTimeout(jiraExtension, 2000);
 })();
