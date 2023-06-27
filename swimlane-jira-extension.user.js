@@ -19,7 +19,7 @@
 // changelog
 //
 // 0.2.1 shorten response times
-// * shorten the time in which the script checks the
+// * shorten the time in which the script checks if a refresh is necessary.
 //
 // 0.2.0 fix reload issue
 // * checks every 2 seconds if there is missing a specific css-class

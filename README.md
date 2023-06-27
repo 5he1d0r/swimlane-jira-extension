@@ -19,7 +19,7 @@ Go [here](https://openuserjs.org/scripts/5he1d0r/swimlane_jira_extension) and in
 
 ### Alternativ setup
 
-If you are not allowed by any restrictions or simply don't want to install a js script engine plugin to your browser you can add the script by a bookmark.
+If you are not allowed to or simply don't want to install a js script engine plugin to your browser you can add the script by a bookmark.
 In this bookmark you have prefix the script with `javascript:` but ***without*** the comments above.
 
 **Be aware that this will not trigger automatic updates of the script.
