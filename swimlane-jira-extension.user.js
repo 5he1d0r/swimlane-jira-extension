@@ -2,7 +2,7 @@
 // @name         swimlane jira extension
 // @namespace    https://openuserjs.org/users/5he1d0r
 // @copyright    2023, 5he1d0r (https://openuserjs.org/users/5he1d0r)
-// @version      0.2.0
+// @version      0.2.1
 // @license      MIT
 // @author       5he1d0r
 // @match        *://*/*RapidBoard.jspa?rapidView=*
@@ -17,6 +17,9 @@
 // ==/OpenUserJS==
 
 // changelog
+//
+// 0.2.1 shorten response times
+// * shorten the time in which the script checks the
 //
 // 0.2.0 fix reload issue
 // * checks every 2 seconds if there is missing a specific css-class
@@ -38,44 +41,45 @@ const avatar = (assignee) =>
     />
   </span>
 </span>
-`
+`;
 
 const displayAssignee = (element, json) => {
-    let assignee = json.fields.assignee
-    if(assignee == null) return;
+    let assignee = json.fields.assignee;
+    if (assignee == null) return;
     let e = element.querySelector(".ghx-bandaid");
     e.innerHTML = e.innerHTML + avatar(assignee);
-}
+};
 
 const loadTicketAndModifySwimlane = async (element) => {
     let ticket = element.getAttribute("data-issue-key");
-    if(ticket == null) return;
+    if (ticket == null) return;
     const response = await fetch(`${window.location.origin}/rest/api/latest/issue/${ticket}`);
     let json = await response.json();
     displayAssignee(element, json);
-}
+};
 
 const performJiraExtension = () => {
     Array.prototype.forEach.call(
         window.document.getElementsByClassName("ghx-swimlane-header"),
-        element => loadTicketAndModifySwimlane(element));
+        element => loadTicketAndModifySwimlane(element)
+    );
 };
 
 const elementIsRemoved = async (selector) => {
     while (document.querySelector(selector) !== null) {
-        await new Promise((r) => setTimeout(r, 2000));
+        await new Promise((r) => setTimeout(r, 1000));
     }
     return true;
-}
+};
 
 const jiraExtension = async () => {
     while (true) {
         let isRemoved = await elementIsRemoved(".jira-swimlane-extension");
         if (isRemoved) performJiraExtension();
-        await new Promise((r) => setTimeout(r, 5000));
+        await new Promise((r) => setTimeout(r, 2000));
     }
-}
+};
 
 (function() {
-    setTimeout(jiraExtension, 2000);
+    setTimeout(jiraExtension, 1000);
 })();
