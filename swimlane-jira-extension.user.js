@@ -2,7 +2,7 @@
 // @name         swimlane jira extension
 // @namespace    https://openuserjs.org/users/5he1d0r
 // @copyright    2023, 5he1d0r (https://openuserjs.org/users/5he1d0r)
-// @version      0.2.1
+// @version      0.3.0
 // @license      MIT
 // @author       5he1d0r
 // @match        *://*/*RapidBoard.jspa?rapidView=*
@@ -17,6 +17,9 @@
 // ==/OpenUserJS==
 
 // changelog
+// 0.3.0
+// * add button to open config overlay
+// * add empty config overlay with close-button
 //
 // 0.2.1 shorten response times
 // * shorten the time in which the script checks if a refresh is necessary.
