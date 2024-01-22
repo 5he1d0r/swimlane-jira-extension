@@ -28,9 +28,36 @@
 //
 // 0.1 Initial release
 
+class JiraSwimlaneExtensionConfig {
+    configButton = () =>
+        `
+<div class="config config-button jira-swimlane-extension-config"
+        style="
+            margin-right: 10px;
+            color: #0066ff;
+        "
+>
+  <a id="jira-swimlane-extension-config-button"
+          class="aui-button aui-button-primary applyChanges"
+          style="color: #ddeeff"
+          title="Open config for swimlane extension"
+  >jira swimlane extension config</a>
+</div>
+`
+
+    constructor() {
+        this.addConfigButton();
+    }
+
+    addConfigButton() {
+        let header = window.document.getElementsByClassName("aui-header-secondary")[0].children[0];
+        header.innerHTML = this.configButton() + header.innerHTML;
+    }
+}
+
 // TODO: propper styling of the avatars
 const avatar = (assignee) =>
-`
+    `
 <span class="aui-avatar jira-swimlane-extension">
   <span class="aui-avatar-inner">
     <img src="${assignee.avatarUrls["48x48"]}"
@@ -73,10 +100,11 @@ const elementIsRemoved = async (selector) => {
 };
 
 const jiraExtension = async () => {
+    new JiraSwimlaneExtensionConfig();
     while (true) {
         let isRemoved = await elementIsRemoved(".jira-swimlane-extension");
         if (isRemoved) performJiraExtension();
-        await new Promise((r) => setTimeout(r, 2000));
+        await new Promise((r) => setTimeout(r, 1000));
     }
 };
 
