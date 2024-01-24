@@ -5,7 +5,7 @@ show assignee in swimlane on active jira sprint
 ## Information
 
 Currently showing the assigned user of the ticket at the end of the swimlane in the active sprint.
-Only display the avatar if this is a tickt and someone is assigned.
+Only display the avatar if this is a ticket and someone is assigned.
 
 Features like configuration panel, story points, worklog, ... are planed.
 
