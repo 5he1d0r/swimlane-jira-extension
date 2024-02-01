@@ -2,7 +2,7 @@
 // @name         swimlane jira extension
 // @namespace    https://openuserjs.org/users/5he1d0r
 // @copyright    2023, 5he1d0r (https://openuserjs.org/users/5he1d0r)
-// @version      0.3.0
+// @version      0.3.1
 // @license      MIT
 // @author       5he1d0r
 // @match        *://*/*RapidBoard.jspa?rapidView=*
@@ -17,6 +17,9 @@
 // ==/OpenUserJS==
 
 // changelog
+// 0.3.1
+// * fix the broken buttons of jira because of the hidden overlay
+//
 // 0.3.0
 // * add button to open config overlay
 // * add empty config overlay with close-button
@@ -34,7 +37,7 @@
 class JiraSwimlaneExtensionConfig {
     configButton = () =>
         `
-<div class="config config-button jira-swimlane-extension-config"
+<div id="jira-swimlane-extension-config" class="config config-button jira-swimlane-extension-config"
         style="
             margin-right: 10px;
             color: #0066ff;
@@ -46,65 +49,73 @@ class JiraSwimlaneExtensionConfig {
           title="Open config for swimlane extension"
   >jira swimlane extension config</a>
 </div>
-`
+`;
 
-    configOverlay = () =>
-        `
+    constructor() {
+        let isRemoved = elementIsRemoved("#jira-swimlane-extension-config");
+        if(!isRemoved) return;
+        let header = window.document.getElementsByClassName("aui-header-secondary")[0].children[0];
+        header.innerHTML = this.configButton() + header.innerHTML;
+        this.addEventListener();
+    }
+
+    addEventListener() {
+        document.querySelector("a[id=jira-swimlane-extension-config-button]").addEventListener('click', this.showOverlay());
+    }
+
+    showOverlay = () => function() {
+        const configOverlay = () =>
+            `
 <div id="jira-swimlane-extension-config-overlay"
         class="jira-dialog jira-dialog-core box-shadow jira-dialog-open popup-width-small jira-dialog-content-ready jira-swimlane-extension-config-overlay"
         style="width: 360px; margin-left: -181px; margin-top: -102.5px;"
-        hidden
 >
   <header class="jira-dialog-heading jira-dialog-core-heading">
     <h2>Jira swimlane extension</h2>
   </header>
+  <div>
+  </div>
   <footer class="jira-dialog-content jira-dialog-core-content">
     <div class="buttons-container form-footer">
       <div class="buttons">
         <a id="jira-swimlane-extension-config-overlay-close"
                 class="cancel aui-button"
                 resolved
-        >Close</a>
+        >Close and reload</a>
       </div>
     </div>
   </footer>
 </div>
-`
+`;
 
-    constructor() {
-        this.addConfigButton();
-        this.addConfigOverlay();
-        this.initializeEventListener();
-    }
+        class ConfigOverlay {
+            constructor(){
+                let isRemoved = elementIsRemoved("#jira-swimlane-extension-config-overlay");
+                if(!isRemoved) return;
+                let body = window.document.getElementById("jira");
+                body.innerHTML = body.innerHTML + configOverlay();
+                this.addEventListener();
+            }
 
-    addConfigButton() {
-        let header = window.document.getElementsByClassName("aui-header-secondary")[0].children[0];
-        header.innerHTML = this.configButton() + header.innerHTML;
-    }
+            addEventListener() {
+                document.querySelector("a[id=jira-swimlane-extension-config-overlay-close]").addEventListener('click', this.hideOverlay());
+            }
 
-    addConfigOverlay() {
-        let body = window.document.getElementById("jira");
-        body.innerHTML = body.innerHTML + this.configOverlay();
-    }
-
-    initializeEventListener() {
-        document.querySelector("a[id=jira-swimlane-extension-config-button]").addEventListener('click', this.showOverlay());
-        document.querySelector("a[id=jira-swimlane-extension-config-overlay-close]").addEventListener('click', this.hideOverlay());
-    }
-
-    showOverlay = () => function() {
-        window.document.getElementById("jira-swimlane-extension-config-overlay").hidden = false;
-    }
-
-    hideOverlay = () => function() {
-        window.document.getElementById("jira-swimlane-extension-config-overlay").hidden = true;
-    }
+            hideOverlay = () => function() {
+                let overlay = window.document.getElementById("jira-swimlane-extension-config-overlay");
+                if (overlay.parentNode) {
+                    overlay.parentNode.removeChild(overlay);
+                }
+                window.location.reload();
+            };
+        }
+        new ConfigOverlay();
+    };
 }
 
-// TODO: propper styling of the avatars
 const avatar = (assignee) =>
     `
-<span class="aui-avatar jira-swimlane-extension">
+<span id="jira-swimlane-extension" class="aui-avatar jira-swimlane-extension">
   <span class="aui-avatar-inner">
     <img src="${assignee.avatarUrls["48x48"]}"
          class="aui-avatar-img"
@@ -119,6 +130,8 @@ const avatar = (assignee) =>
 const displayAssignee = (element, json) => {
     let assignee = json.fields.assignee;
     if (assignee == null) return;
+    let isRemoved = elementIsRemoved("#jira-swimlane-extension");
+    if(!isRemoved) return;
     let e = element.querySelector(".ghx-bandaid");
     e.innerHTML = e.innerHTML + avatar(assignee);
 };
