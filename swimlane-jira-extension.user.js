@@ -2,7 +2,7 @@
 // @name         swimlane jira extension
 // @namespace    https://openuserjs.org/users/5he1d0r
 // @copyright    2023, 5he1d0r (https://openuserjs.org/users/5he1d0r)
-// @version      0.3.0
+// @version      0.3.1
 // @license      MIT
 // @author       5he1d0r
 // @match        *://*/*RapidBoard.jspa?rapidView=*
@@ -17,6 +17,9 @@
 // ==/OpenUserJS==
 
 // changelog
+// 0.3.1
+// * fix the broken buttons of jira because of the hidden overlay
+//
 // 0.3.0
 // * add button to open config overlay
 // * add empty config overlay with close-button
